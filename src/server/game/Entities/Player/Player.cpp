@@ -7121,6 +7121,9 @@ void Player::CheckAreaExploreAndOutdoor()
         {
             if (getLevel() >= sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
             {
+#ifdef ELUNA
+                sEluna->OnExploreNewArea(this, areaId);
+#endif
                 SendExplorationExperience(areaId, 0);
             }
             else
@@ -7146,6 +7149,9 @@ void Player::CheckAreaExploreAndOutdoor()
                     XP = uint32(sObjectMgr->GetBaseXP(areaEntry->area_level) * sWorld->getRate(RATE_XP_EXPLORE));
                 }
 
+#ifdef ELUNA
+                sEluna->OnExploreNewArea(this, areaId);
+#endif
                 GiveXP(XP, nullptr);
                 SendExplorationExperience(areaId, XP);
             }
