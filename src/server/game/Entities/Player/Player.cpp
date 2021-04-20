@@ -16316,6 +16316,10 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     UpdateZoneDependentAuras(GetZoneId());
     UpdateAreaDependentAuras(GetAreaId());
 
+#ifdef ELUNA
+    sEluna->OnQuestComplete(this, questGiver, quest);
+#endif
+
     sScriptMgr->OnPlayerCompleteQuest(this, quest);
 }
 
